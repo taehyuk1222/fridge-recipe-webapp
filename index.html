@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fridge Recipe - 스마트 냉장고 관리</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="top-nav">
+        <div class="container nav-container">
+            <div class="logo">Fridge Recipe</div>
+            <div class="nav-links">
+                <a href="#how-it-works">서비스 소개</a>
+                <a href="#dashboard">대시보드</a>
+                <a href="#recipes">추천 레시피</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 1. Hero Section -->
+    <section class="hero-section">
+        <div class="container hero-grid">
+            <div class="hero-text-area">
+                <span class="eyebrow">Smart Fridge Management</span>
+                <h1 class="hero-title">냉장고 속 재료를<br>낭비 없이 소비하는<br><span class="text-gradient">스마트 레시피 추천 서비스</span></h1>
+                <p class="hero-desc">유통기한 관리는 기본, 내 냉장고 속 재료에 딱 맞는 최적의 레시피를 제안받으세요. 매일 뭐 먹을지 고민하는 시간을 줄여드립니다.</p>
+                <div class="hero-ctas">
+                    <button class="btn-primary" onclick="document.getElementById('dashboard').scrollIntoView({behavior: 'smooth'})">식재료 등록하기</button>
+                    <button class="btn-secondary" onclick="document.getElementById('recipes').scrollIntoView({behavior: 'smooth'})">추천 레시피 보기</button>
+                </div>
+            </div>
+            
+            <div class="hero-visual-area">
+                <div class="mockup-card">
+                    <div class="mockup-header">
+                        <div class="mac-dots"><span></span><span></span><span></span></div>
+                        <span class="mockup-title">나의 냉장고 요약</span>
+                    </div>
+                    <div class="mockup-body">
+                        <div class="stat-row">
+                            <div class="stat-info">
+                                <div class="stat-icon bg-gray"></div>
+                                <span class="stat-label">보유 재료</span>
+                            </div>
+                            <span class="stat-value">5<small>개</small></span>
+                        </div>
+                        <div class="stat-row">
+                            <div class="stat-info">
+                                <div class="stat-icon bg-red"></div>
+                                <span class="stat-label">우선 소비</span>
+                            </div>
+                            <span class="stat-value">3<small>개</small></span>
+                        </div>
+                        <div class="stat-row highlight">
+                            <div class="stat-info">
+                                <div class="stat-icon bg-mint"></div>
+                                <span class="stat-label">추천 레시피</span>
+                            </div>
+                            <span class="stat-value highlight-text">4<small>개</small></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Decorative blur elements -->
+                <div class="blur-blob blob-mint"></div>
+                <div class="blur-blob blob-gray"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Problem & Value Section -->
+    <section class="problem-section section-padding">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2>아직도 냉장고 앞에서 고민하시나요?</h2>
+                <p>버려지는 식재료와 매일의 메뉴 고민, Fridge Recipe가 해결해 드립니다.</p>
+            </div>
+            
+            <div class="problem-grid">
+                <div class="feature-card">
+                    <div class="feature-label">Problem 01</div>
+                    <div class="feature-icon">01</div>
+                    <h3 class="feature-title">유통기한 임박 알림</h3>
+                    <p class="feature-desc">언제 샀는지 깜빡한 식재료, 버려지는 일 없도록 유통기한을 똑똑하게 추적하고 미리 알려줍니다.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-label">Problem 02</div>
+                    <div class="feature-icon">02</div>
+                    <h3 class="feature-title">손쉬운 재료 파악</h3>
+                    <p class="feature-desc">냉장고 구석에 무엇이 있는지 한눈에 파악하고, 직관적인 대시보드로 체계적인 관리가 가능해집니다.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-label">Problem 03</div>
+                    <div class="feature-icon">03</div>
+                    <h3 class="feature-title">남은 재료 100% 활용</h3>
+                    <p class="feature-desc">애매하게 남은 재료들도 훌륭한 요리가 될 수 있도록, 보유 식재료 기반 맞춤 레시피를 제안합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Smart Recommendation Flow Section -->
+    <section id="how-it-works" class="flow-section section-padding bg-light">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2>스마트한 추천 프로세스</h2>
+                <p>단 4단계로 냉장고 관리가 완벽해집니다.</p>
+            </div>
+            
+            <div class="flow-container">
+                <div class="flow-step">
+                    <div class="step-circle">1</div>
+                    <h4 class="step-title">식재료 등록</h4>
+                    <p class="step-desc">구매한 재료 입력</p>
+                </div>
+                <div class="step-line"></div>
+                <div class="flow-step">
+                    <div class="step-circle">2</div>
+                    <h4 class="step-title">D-day 계산</h4>
+                    <p class="step-desc">유통기한 자동 추적</p>
+                </div>
+                <div class="step-line"></div>
+                <div class="flow-step">
+                    <div class="step-circle">3</div>
+                    <h4 class="step-title">우선소비 선별</h4>
+                    <p class="step-desc">임박 재료 우선 배치</p>
+                </div>
+                <div class="step-line"></div>
+                <div class="flow-step active">
+                    <div class="step-circle">4</div>
+                    <h4 class="step-title">맞춤 레시피 추천</h4>
+                    <p class="step-desc">최적의 요리 제안</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Main Dashboard Section -->
+    <section id="dashboard" class="dashboard-section section-padding">
+        <div class="container">
+            <div class="section-header">
+                <h2>나의 냉장고 대시보드</h2>
+                <p>현재 냉장고 상태를 한눈에 확인하고 식재료를 관리하세요.</p>
+            </div>
+            
+            <div class="dashboard-layout">
+                <!-- Left: Input & Priority -->
+                <div class="dash-col dash-left">
+                    
+                    <div class="card premium-card">
+                        <div class="card-header">
+                            <h3>식재료 등록</h3>
+                            <span class="card-subtitle">새로운 재료 추가</span>
+                        </div>
+                        <form id="ingredient-form" class="clean-form">
+                            <div class="input-wrap">
+                                <label for="name">재료명</label>
+                                <input type="text" id="name" placeholder="예: 양파">
+                            </div>
+                            <div class="input-row">
+                                <div class="input-wrap">
+                                    <label for="quantity">수량</label>
+                                    <input type="text" id="quantity" placeholder="예: 2개">
+                                </div>
+                                <div class="input-wrap">
+                                    <label for="expiry">유통기한</label>
+                                    <input type="date" id="expiry">
+                                </div>
+                            </div>
+                            <button type="button" id="add-btn" class="btn-primary w-full mt-2">등록하기</button>
+                        </form>
+                    </div>
+
+                    <div class="card premium-card mt-4">
+                        <div class="card-header">
+                            <h3>소비 기한 임박</h3>
+                            <span class="card-subtitle">빠른 시일 내에 소비 필요</span>
+                        </div>
+                        <ul class="priority-list">
+                            <li class="priority-item">
+                                <div class="p-info">
+                                    <span class="p-name">우유</span>
+                                    <span class="p-qty">1팩</span>
+                                </div>
+                                <span class="badge badge-expired">기한 만료</span>
+                            </li>
+                            <li class="priority-item">
+                                <div class="p-info">
+                                    <span class="p-name">두부</span>
+                                    <span class="p-qty">1모</span>
+                                </div>
+                                <span class="badge badge-today">오늘까지</span>
+                            </li>
+                            <li class="priority-item">
+                                <div class="p-info">
+                                    <span class="p-name">콩나물</span>
+                                    <span class="p-qty">1봉지</span>
+                                </div>
+                                <span class="badge badge-warning">D-2</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <!-- Right: Inventory -->
+                <div class="dash-col dash-right">
+                    <div class="card premium-card h-full">
+                        <div class="card-header">
+                            <h3>나의 냉장고 보관함</h3>
+                            <span class="card-subtitle">현재 보관 중인 안전한 식재료 목록</span>
+                        </div>
+                        
+                        <div class="inventory-tags">
+                            <div class="inv-tag">
+                                <span class="inv-name">양파</span>
+                                <span class="inv-qty">3개</span>
+                            </div>
+                            <div class="inv-tag">
+                                <span class="inv-name">당근</span>
+                                <span class="inv-qty">2개</span>
+                            </div>
+                            <div class="inv-tag">
+                                <span class="inv-name">감자</span>
+                                <span class="inv-qty">5개</span>
+                            </div>
+                            <div class="inv-tag">
+                                <span class="inv-name">대파</span>
+                                <span class="inv-qty">1단</span>
+                            </div>
+                            <div class="inv-tag">
+                                <span class="inv-name">마늘</span>
+                                <span class="inv-qty">1망</span>
+                            </div>
+                            <div class="inv-tag empty-tag">
+                                <span>+ 추가 식재료 없음</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Recipe Preview Section -->
+    <section id="recipes" class="recipe-section section-padding bg-light">
+        <div class="container">
+            <div class="section-header">
+                <h2>오늘의 추천 레시피</h2>
+                <p>우선 소비 식재료를 활용해 지금 바로 만들 수 있는 요리를 제안합니다.</p>
+            </div>
+            
+            <div class="recipe-rich-grid">
+                
+                <!-- Recipe 1: Ready -->
+                <div class="recipe-card-rich">
+                    <div class="rc-header">
+                        <span class="status-label label-ready">바로 요리 가능</span>
+                        <h3 class="rc-title">얼큰 콩나물국</h3>
+                        <p class="rc-reason">추천 이유: 우선 소비 식재료인 '콩나물'을 즉시 소진할 수 있는 최고의 국물 요리입니다.</p>
+                    </div>
+                    
+                    <div class="rc-body">
+                        <div class="rc-ingredient-box">
+                            <div class="box-title">필요한 보유 재료</div>
+                            <div class="ingredient-chips">
+                                <span class="chip chip-have">콩나물</span>
+                                <span class="chip chip-have">대파</span>
+                                <span class="chip chip-have">다진마늘</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="rc-footer">
+                        <button class="btn-text recipe-btn">레시피 상세보기 <span class="arrow">&rarr;</span></button>
+                    </div>
+                </div>
+
+                <!-- Recipe 2: Partial -->
+                <div class="recipe-card-rich">
+                    <div class="rc-header">
+                        <span class="status-label label-partial">추가 재료 필요</span>
+                        <h3 class="rc-title">두부 짜글이</h3>
+                        <p class="rc-reason">추천 이유: 오늘 만료되는 '두부'를 메인으로 활용하여 든든한 한 끼를 완성할 수 있습니다.</p>
+                    </div>
+                    
+                    <div class="rc-body">
+                        <div class="rc-split">
+                            <div class="rc-ingredient-box split-have">
+                                <div class="box-title">활용 가능 재료</div>
+                                <div class="ingredient-chips">
+                                    <span class="chip chip-have">두부</span>
+                                    <span class="chip chip-have">양파</span>
+                                    <span class="chip chip-have">대파</span>
+                                </div>
+                            </div>
+                            <div class="rc-ingredient-box split-miss">
+                                <div class="box-title miss-title">추가 구매 필요</div>
+                                <div class="ingredient-chips">
+                                    <span class="chip chip-miss">돼지고기</span>
+                                    <span class="chip chip-miss">고추장</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="rc-footer">
+                        <button class="btn-text recipe-btn">레시피 상세보기 <span class="arrow">&rarr;</span></button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <div class="container">
+            <div class="footer-logo">Fridge Recipe</div>
+            <p class="footer-desc">스마트한 냉장고 관리의 시작</p>
+            <p class="copyright">&copy; 2026 Fridge Recipe. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
