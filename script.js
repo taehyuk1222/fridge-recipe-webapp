@@ -15,6 +15,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const expiryInput = document.getElementById('expiry');
     const addBtn = document.getElementById('add-btn');
 
+    // D-day 계산 함수
+    function calculateDDay(expiryString) {
+        if (!expiryString) return { label: '', statusClass: '' };
+        
+        const expiryDate = new Date(expiryString);
+        const today = new Date();
+        
+        // 시간은 0으로 초기화해서 날짜만 비교
+        expiryDate.setHours(0, 0, 0, 0);
+        today.setHours(0, 0, 0, 0);
+        
+        const diffTime = expiryDate - today;
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        
+        if (diffDays < 0) {
+            return { label: '기한 만료', statusClass: 'badge-expired' };
+        } else if (diffDays === 0) {
+            return { label: '오늘까지', statusClass: 'badge-today' };
+        } else if (diffDays <= 3) {
+            return { label: `D-${diffDays}`, statusClass: 'badge-warning' };
+        } else {
+            return { label: `D-${diffDays}`, statusClass: 'badge-safe' };
+        }
+    }
+
     // 식재료 목록 렌더링 함수
     function renderInventory() {
         if (!inventoryList) return;
@@ -38,10 +63,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 tag.classList.add('editing');
             }
             
+            const dDayInfo = calculateDDay(item.expiry);
+            
             tag.innerHTML = `
                 <span class="inv-name">${item.name}</span>
                 <span class="inv-qty">${item.quantity}</span>
                 <span class="inv-expiry">${item.expiry}</span>
+                <span class="badge ${dDayInfo.statusClass}">${dDayInfo.label}</span>
                 <div class="inv-actions">
                     <button class="inv-btn inv-btn-edit" title="수정">&#9998;</button>
                     <button class="inv-btn inv-btn-delete" title="삭제">&#10005;</button>

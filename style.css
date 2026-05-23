@@ -657,6 +657,7 @@ input:focus {
 .badge-expired { background: var(--badge-red-bg); color: var(--badge-red-text); border: 1px solid rgba(224,49,49,0.2); }
 .badge-today { background: var(--badge-orange-bg); color: var(--badge-orange-text); border: 1px solid rgba(232,89,12,0.2); }
 .badge-warning { background: var(--badge-yellow-bg); color: var(--badge-yellow-text); border: 1px solid rgba(217,119,6,0.2); }
+.badge-safe { background: var(--badge-ready-bg); color: var(--badge-ready-text); border: 1px solid rgba(12,166,120,0.2); }
 
 /* Inventory Tags */
 .inventory-tags {
