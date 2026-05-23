@@ -7,7 +7,13 @@ document.addEventListener('DOMContentLoaded', () => {
         ingredients = [];
     }
 
+    let editingId = null; // 현재 수정 중인 항목의 ID
+
     const inventoryList = document.querySelector('.inventory-tags');
+    const nameInput = document.getElementById('name');
+    const qtyInput = document.getElementById('quantity');
+    const expiryInput = document.getElementById('expiry');
+    const addBtn = document.getElementById('add-btn');
 
     // 식재료 목록 렌더링 함수
     function renderInventory() {
@@ -28,12 +34,53 @@ document.addEventListener('DOMContentLoaded', () => {
         ingredients.forEach(item => {
             const tag = document.createElement('div');
             tag.className = 'inv-tag';
+            if (item.id === editingId) {
+                tag.classList.add('editing');
+            }
             
             tag.innerHTML = `
                 <span class="inv-name">${item.name}</span>
                 <span class="inv-qty">${item.quantity}</span>
                 <span class="inv-expiry">${item.expiry}</span>
+                <div class="inv-actions">
+                    <button class="inv-btn inv-btn-edit" title="수정">&#9998;</button>
+                    <button class="inv-btn inv-btn-delete" title="삭제">&#10005;</button>
+                </div>
             `;
+
+            // 수정 버튼 이벤트
+            const editBtn = tag.querySelector('.inv-btn-edit');
+            editBtn.addEventListener('click', () => {
+                nameInput.value = item.name;
+                qtyInput.value = item.quantity;
+                expiryInput.value = item.expiry;
+                
+                editingId = item.id;
+                if (addBtn) addBtn.textContent = '수정 완료';
+                
+                renderInventory(); // editing 스타일 적용을 위해 다시 렌더링
+            });
+
+            // 삭제 버튼 이벤트
+            const deleteBtn = tag.querySelector('.inv-btn-delete');
+            deleteBtn.addEventListener('click', () => {
+                if (confirm('이 식재료를 삭제하시겠습니까?')) {
+                    ingredients = ingredients.filter(i => i.id !== item.id);
+                    localStorage.setItem('fridge_ingredients', JSON.stringify(ingredients));
+                    
+                    // 만약 삭제한 항목이 현재 수정 중인 항목이라면 폼 초기화
+                    if (editingId === item.id) {
+                        editingId = null;
+                        nameInput.value = '';
+                        qtyInput.value = '';
+                        expiryInput.value = '';
+                        if (addBtn) addBtn.textContent = '등록하기';
+                    }
+                    
+                    renderInventory();
+                }
+            });
+
             inventoryList.appendChild(tag);
         });
     }
@@ -41,14 +88,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // 초기 화면 렌더링
     renderInventory();
 
-    // 식재료 추가 버튼 클릭 이벤트
-    const addBtn = document.getElementById('add-btn');
+    // 식재료 추가/수정 버튼 클릭 이벤트
     if (addBtn) {
         addBtn.addEventListener('click', () => {
-            const nameInput = document.getElementById('name');
-            const qtyInput = document.getElementById('quantity');
-            const expiryInput = document.getElementById('expiry');
-
             const name = nameInput.value.trim();
             const quantity = qtyInput.value.trim();
             const expiry = expiryInput.value.trim();
@@ -59,16 +101,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
             
-            // 새로운 식재료 객체 생성
-            const newItem = {
-                id: Date.now().toString(),
-                name: name,
-                quantity: quantity,
-                expiry: expiry
-            };
-
-            // 배열에 추가
-            ingredients.push(newItem);
+            if (editingId) {
+                // 수정 모드
+                const index = ingredients.findIndex(i => i.id === editingId);
+                if (index !== -1) {
+                    ingredients[index] = { ...ingredients[index], name, quantity, expiry };
+                }
+                editingId = null;
+                addBtn.textContent = '등록하기';
+            } else {
+                // 추가 모드
+                const newItem = {
+                    id: Date.now().toString(),
+                    name: name,
+                    quantity: quantity,
+                    expiry: expiry
+                };
+                ingredients.push(newItem);
+            }
 
             // localStorage에 저장
             localStorage.setItem('fridge_ingredients', JSON.stringify(ingredients));
