@@ -1,12 +1,222 @@
-/**
-* 레시피 데이터베이스
-* id: 고유 번호,
-* name: 요리명
-* ingredients: [String] 활용 가능한 재료 배열
-* needed: [String] 추가 구매 재료 배열
-* category: 요리 종류
-* difficulty: 난이도
-* cookingTime: 조리 시간
-* calories: 칼로리(kcal)
-* recipeUrl: 레시피 URL
-*/
+export const RECIPE_DATABASE = [
+    {
+        id: 1,
+        name: "묵은지 김치찜",
+        ingredients: ["김치"],
+        needed: ["돼지고기", "묵은지", "다진마늘"],
+        category: "찜요리",
+        difficulty: "중급",
+        cookingTime: "60분 이내",
+        calories: 600,
+        recipeUrl: "https://www.10000recipe.com/recipe/6875468"
+    },
+    {
+        id: 2,
+        name: "된장찌개",
+        ingredients: ["된장", "두부", "청양고추", "팽이버섯"],
+        needed: ["애호박", "양파", "감자"],
+        category: "국물요리",
+        difficulty: "중급",
+        cookingTime: "60분 이내",
+        calories: 200,
+        recipeUrl: "https://www.10000recipe.com/recipe/6851832"
+    },
+    {
+        id: 3,
+        name: "메추리알볶음",
+        ingredients: ["메추리알", "청양고추"],
+        needed: ["다진마늘"],
+        category: "반찬",
+        difficulty: "초급",
+        cookingTime: "10분 이내",
+        calories: 150,
+        recipeUrl: "https://www.10000recipe.com/recipe/6895112"
+    },
+    {
+        id: 4,
+        name: "순대볶음",
+        ingredients: ["양파", "대파"],
+        needed: ["순대", "들깨가루", "깻잎"],
+        category: "볶음요리",
+        difficulty: "중급",
+        cookingTime: "20분 이내",
+        calories: 650,
+        recipeUrl: "https://www.10000recipe.com/recipe/6913906"
+    },
+    {
+        id: 5,
+        name: "카레",
+        ingredients: ["양파", "당근"],
+        needed: ["카레가루", "감자", "돼지고기"],
+        category: "일품요리",
+        difficulty: "중급",
+        cookingTime: "30분 이내",
+        calories: 500,
+        recipeUrl: "https://www.10000recipe.com/recipe/6886933"
+    },
+    {
+        id: 6,
+        name: "간장계란밥",
+        ingredients: ["계란", "간장", "마요네즈"],
+        needed: ["버터"],
+        category: "밥요리",
+        difficulty: "초급",
+        cookingTime: "5분 이내",
+        calories: 500,
+        recipeUrl: "https://www.10000recipe.com/recipe/6856565"
+    },
+    {
+        id: 7,
+        name: "떡볶이",
+        ingredients: ["고추장", "대파"],
+        needed: ["떡", "어묵", "소시지"],
+        category: "분식",
+        difficulty: "초급",
+        cookingTime: "30분 이내",
+        calories: 700,
+        recipeUrl: "https://www.10000recipe.com/recipe/6846848"
+    },
+    {
+        id: 8,
+        name: "잡채",
+        ingredients: ["당근", "시금치"],
+        needed: ["당면", "돼지고기", "표고버섯", "어묵"],
+        category: "반찬",
+        difficulty: "중급",
+        cookingTime: "30분 이내",
+        calories: 550,
+        recipeUrl: "https://www.10000recipe.com/recipe/6862505"
+    },
+    {
+        id: 9,
+        name: "김치볶음밥",
+        ingredients: ["김치"],
+        needed: ["계란", "햄", "대파"],
+        category: "밥요리",
+        difficulty: "초급",
+        cookingTime: "20분 이내",
+        calories: 600,
+        recipeUrl: "https://www.10000recipe.com/recipe/6903110"
+    },
+    {
+        id: 10,
+        name: "라면",
+        ingredients: ["라면사리", "스프", "계란", "대파"],
+        needed: [],
+        category: "면요리",
+        difficulty: "초급",
+        cookingTime: "5분 이내",
+        calories: 500,
+        recipeUrl: "https://www.10000recipe.com/recipe/6919436"
+    },
+    {
+        id: 11,
+        name: "토마토파스타",
+        ingredients: ["면", "마늘"],
+        needed: ["토마토소스", "페퍼론치노"],
+        category: "면요리",
+        difficulty: "중급",
+        cookingTime: "15분 이내",
+        calories: 600,
+        recipeUrl: "https://www.10000recipe.com/recipe/6838229"
+    },
+    {
+        id: 12,
+        name: "파전",
+        ingredients: ["쪽파", "계란"],
+        needed: ["튀김가루", "탄산수"],
+        category: "전",
+        difficulty: "초급",
+        cookingTime: "10분 이내",
+        calories: 600,
+        recipeUrl: "https://www.10000recipe.com/recipe/6887020"
+    },
+    {
+        id: 13,
+        name: "오므라이스",
+        ingredients: ["계란", "감자", "햄"],
+        needed: ["파", "양파"],
+        category: "일품요리",
+        difficulty: "중급",
+        cookingTime: "15분 이내",
+        calories: 600,
+        recipeUrl: "https://www.10000recipe.com/recipe/6882172"
+    },
+    {
+        id: 14,
+        name: "콩나물국",
+        ingredients: ["콩나물", "대파"],
+        needed: ["마늘", "다시마"],
+        category: "국물요리",
+        difficulty: "초급",
+        cookingTime: "15분 이내",
+        calories: 100,
+        recipeUrl: "https://www.10000recipe.com/recipe/6877595"
+    },
+    {
+        id: 15,
+        name: "스테이크",
+        ingredients: ["마늘"],
+        needed: ["소고기", "버터", "방울토마토", "허브"],
+        category: "양식요리",
+        difficulty: "고급",
+        cookingTime: "20분 이내",
+        calories: 700,
+        recipeUrl: "https://www.10000recipe.com/recipe/6883011"
+    },
+    {
+        id: 16,
+        name: "들깨미역국",
+        ingredients: ["미역", "마늘"],
+        needed: ["소고기", "들깨가루"],
+        category: "국물요리",
+        difficulty: "중급",
+        cookingTime: "15분 이내",
+        calories: 400,
+        recipeUrl: "https://www.10000recipe.com/recipe/6853456"
+    },
+    {
+        id: 17,
+        name: "샌드위치",
+        ingredients: ["식빵", "치즈", "토마토"],
+        needed: ["햄", "양상추"],
+        category: "간식",
+        difficulty: "초급",
+        cookingTime: "20분 이내",
+        calories: 500,
+        recipeUrl: "https://www.10000recipe.com/recipe/6707909"
+    },
+    {
+        id: 18,
+        name: "샐러드",
+        ingredients: ["양상추", "토마토", "맛살", "오이"],
+        needed: ["드레싱"],
+        category: "간식",
+        difficulty: "초급",
+        cookingTime: "10분 이내",
+        calories: 150,
+        recipeUrl: "https://www.10000recipe.com/recipe/1677973"
+    },
+    {
+        id: 19,
+        name: "만두국",
+        ingredients: ["만두", "대파"],
+        needed: ["계란", "다진마늘"],
+        category: "국물요리",
+        difficulty: "중급",
+        cookingTime: "20분 이내",
+        calories: 400,
+        recipeUrl: "https://www.10000recipe.com/recipe/6950880"
+    },
+    {
+        id: 20,
+        name: "비엔나소시지볶음",
+        ingredients: ["비엔나소시지", "양파"],
+        needed: ["케첩", "설탕"],
+        category: "볶음",
+        difficulty: "초급",
+        cookingTime: "10분 이내",
+        calories: 500,
+        recipeUrl: "https://www.10000recipe.com/recipe/6928877"
+    }
+];
