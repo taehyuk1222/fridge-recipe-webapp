@@ -693,6 +693,16 @@ input:focus {
     color: var(--text-light);
 }
 
+.inv-expiry {
+    font-size: 0.75rem;
+    color: var(--color-light-mint);
+    background: var(--color-bg-mint-tint);
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 600;
+    margin-left: 4px;
+}
+
 .empty-tag {
     background: rgba(13, 71, 54, 0.03); /* Soft accent background for empty slot */
     border: 1px dashed var(--border-input);
