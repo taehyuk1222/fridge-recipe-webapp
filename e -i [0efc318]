@@ -1,0 +1,22 @@
+[33m0efc318[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m feat: 레시피 20개 데이터 구조 확장 및 수정 #6
+[33m3a6fa0a[m feat: 우선소비 식재료 표시 기능 구현 #5
+[33m6f051da[m Merge pull request #13 from taehyuk1222/feature/issue-4-dday-calculation
+[33mf0136ab[m feat: 유통기한 D-day 계산 기능 구현 #4
+[33m48c8b75[m Merge pull request #12 from taehyuk1222/feature/issue-3-ingredient-list
+[33m2c80174[m feat: 식재료 수정 및 삭제 기능 추가 #3
+[33mcc50423[m feat: 식재료 등록 및 목록 출력 기능 구현 #3
+[33ma7e5db8[m Merge branch 'main' of https://github.com/taehyuk1222/fridge-recipe-webapp
+[33m7f60c68[m feat: 보유 재료 기반  레시피 추천 알고리즘 구현 #7
+[33m67723f3[m feat: 보유 재료 기반  레시피 추천 알고리즘 구현 #7
+[33mf1a79d2[m feat: 보유 재료 기반 레시피 추천 알고리즘 구현 #7
+[33m78603e7[m chore: 오타가 있는 recommand 파일들 삭제
+[33mcadf4d4[m chore: 불필요한 recommend_base.js 파일 삭제
+[33m8b34123[m feat: 보유 재료 기반 례시피 추천 알고리즘 구현
+[33m79b0c34[m refactor: 파일 이름을 recommend_base.js로 변경
+[33me734478[m 보유 재료 기반 레시피 추천 알고리즘 구현 #7
+[33m2be54eb[m feat: 보유 재료 기반 래시피 추천 알고리즘 구현 #7
+[33m7f0d1c3[m feat: 레시피 20개 데이터 제작 #6
+[33mcbc0782[m feat: 레시피 20개 데이터 제작 #6
+[33m08d0a35[m Merge pull request #11 from taehyuk1222/feature/issue-2-main-ui
+[33mfdad944[m feat: 웹앱 메인 화면 UI 구현 #2
+[33mcb535bb[m feat: 프로젝트 기본 구조 생성 #1
