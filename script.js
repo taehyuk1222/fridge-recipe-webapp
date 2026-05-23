@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let editingId = null; // 현재 수정 중인 항목의 ID
 
     const inventoryList = document.querySelector('.inventory-tags');
+    const priorityListUl = document.querySelector('.priority-list');
     const nameInput = document.getElementById('name');
     const qtyInput = document.getElementById('quantity');
     const expiryInput = document.getElementById('expiry');
@@ -17,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // D-day 계산 함수
     function calculateDDay(expiryString) {
-        if (!expiryString) return { label: '', statusClass: '' };
+        if (!expiryString) return { label: '', statusClass: '', diffDays: 999 };
         
         const expiryDate = new Date(expiryString);
         const today = new Date();
@@ -30,14 +31,56 @@ document.addEventListener('DOMContentLoaded', () => {
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
         
         if (diffDays < 0) {
-            return { label: '기한 만료', statusClass: 'badge-expired' };
+            return { label: '기한 만료', statusClass: 'badge-expired', diffDays };
         } else if (diffDays === 0) {
-            return { label: '오늘까지', statusClass: 'badge-today' };
+            return { label: '오늘까지', statusClass: 'badge-today', diffDays };
         } else if (diffDays <= 3) {
-            return { label: `D-${diffDays}`, statusClass: 'badge-warning' };
+            return { label: `D-${diffDays}`, statusClass: 'badge-warning', diffDays };
         } else {
-            return { label: `D-${diffDays}`, statusClass: 'badge-safe' };
+            return { label: `D-${diffDays}`, statusClass: 'badge-safe', diffDays };
         }
+    }
+
+    // 우선소비 식재료 렌더링 함수
+    function renderPriorityList() {
+        if (!priorityListUl) return;
+
+        priorityListUl.innerHTML = ''; // 기존 목록 초기화
+
+        // 우선소비 대상 선별 (D-3 이하) 및 정렬 (기한 임박순)
+        const priorityItems = ingredients
+            .map(item => ({ ...item, dDayInfo: calculateDDay(item.expiry) }))
+            .filter(item => item.dDayInfo.diffDays <= 3)
+            .sort((a, b) => a.dDayInfo.diffDays - b.dDayInfo.diffDays);
+
+        if (priorityItems.length === 0) {
+            // 빈 상태 처리
+            const emptyLi = document.createElement('li');
+            emptyLi.className = 'priority-item';
+            emptyLi.innerHTML = `
+                <div class="p-info" style="width: 100%; justify-content: center;">
+                    <span style="color: var(--text-light); font-size: 0.9rem;">현재 급하게 소비할 식재료가 없습니다.</span>
+                </div>
+            `;
+            priorityListUl.appendChild(emptyLi);
+            return;
+        }
+
+        // 우선소비 식재료 출력
+        priorityItems.forEach(item => {
+            const li = document.createElement('li');
+            li.className = 'priority-item';
+            
+            li.innerHTML = `
+                <div class="p-info">
+                    <span class="p-name">${item.name}</span>
+                    <span class="p-qty">${item.quantity}</span>
+                    <span class="inv-expiry" style="margin-left: 8px;">${item.expiry}</span>
+                </div>
+                <span class="badge ${item.dDayInfo.statusClass}">${item.dDayInfo.label}</span>
+            `;
+            priorityListUl.appendChild(li);
+        });
     }
 
     // 식재료 목록 렌더링 함수
@@ -86,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 editingId = item.id;
                 if (addBtn) addBtn.textContent = '수정 완료';
                 
-                renderInventory(); // editing 스타일 적용을 위해 다시 렌더링
+                renderAll();
             });
 
             // 삭제 버튼 이벤트
@@ -96,7 +139,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     ingredients = ingredients.filter(i => i.id !== item.id);
                     localStorage.setItem('fridge_ingredients', JSON.stringify(ingredients));
                     
-                    // 만약 삭제한 항목이 현재 수정 중인 항목이라면 폼 초기화
                     if (editingId === item.id) {
                         editingId = null;
                         nameInput.value = '';
@@ -105,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (addBtn) addBtn.textContent = '등록하기';
                     }
                     
-                    renderInventory();
+                    renderAll();
                 }
             });
 
@@ -113,8 +155,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // 통합 렌더링 함수
+    function renderAll() {
+        renderInventory();
+        renderPriorityList();
+    }
+
     // 초기 화면 렌더링
-    renderInventory();
+    renderAll();
 
     // 식재료 추가/수정 버튼 클릭 이벤트
     if (addBtn) {
@@ -123,14 +171,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const quantity = qtyInput.value.trim();
             const expiry = expiryInput.value.trim();
 
-            // 입력 검증
             if (!name || !quantity || !expiry) {
                 alert('식재료명, 수량, 유통기한을 모두 입력해주세요.');
                 return;
             }
             
             if (editingId) {
-                // 수정 모드
                 const index = ingredients.findIndex(i => i.id === editingId);
                 if (index !== -1) {
                     ingredients[index] = { ...ingredients[index], name, quantity, expiry };
@@ -138,7 +184,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 editingId = null;
                 addBtn.textContent = '등록하기';
             } else {
-                // 추가 모드
                 const newItem = {
                     id: Date.now().toString(),
                     name: name,
@@ -148,13 +193,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 ingredients.push(newItem);
             }
 
-            // localStorage에 저장
             localStorage.setItem('fridge_ingredients', JSON.stringify(ingredients));
 
-            // 화면 다시 그리기
-            renderInventory();
+            renderAll();
             
-            // 입력창 초기화
             nameInput.value = '';
             qtyInput.value = '';
             expiryInput.value = '';
