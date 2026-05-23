@@ -683,6 +683,49 @@ input:focus {
     transform: translateY(-1px);
 }
 
+.inv-tag.editing {
+    border-color: var(--color-light-mint);
+    background: var(--color-bg-mint-tint);
+    box-shadow: 0 0 0 2px rgba(46, 191, 140, 0.2);
+}
+
+.inv-actions {
+    display: flex;
+    gap: 4px;
+    margin-left: 4px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.inv-tag:hover .inv-actions,
+.inv-tag.editing .inv-actions {
+    opacity: 1;
+}
+
+.inv-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-light);
+    font-size: 0.8rem;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.inv-btn:hover {
+    background: var(--color-bg-gray-tint);
+    color: var(--text-strong);
+}
+
+.inv-btn-delete:hover {
+    background: var(--badge-red-bg);
+    color: var(--badge-red-text);
+}
+
 .inv-name {
     font-weight: 600;
     color: var(--text-strong);
@@ -691,6 +734,16 @@ input:focus {
 .inv-qty {
     font-size: 0.85rem;
     color: var(--text-light);
+}
+
+.inv-expiry {
+    font-size: 0.75rem;
+    color: var(--color-light-mint);
+    background: var(--color-bg-mint-tint);
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 600;
+    margin-left: 4px;
 }
 
 .empty-tag {
