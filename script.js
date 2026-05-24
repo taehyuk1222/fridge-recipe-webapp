@@ -11,10 +11,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const inventoryList = document.querySelector('.inventory-tags');
     const priorityListUl = document.querySelector('.priority-list');
+    const recipeGrid = document.getElementById('recipe-grid');
     const nameInput = document.getElementById('name');
     const qtyInput = document.getElementById('quantity');
     const expiryInput = document.getElementById('expiry');
     const addBtn = document.getElementById('add-btn');
+
+    // 모달 요소
+    const modal = document.getElementById('recipe-modal');
+    const modalClose = document.getElementById('modal-close');
+
+    if (modalClose) {
+        modalClose.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+    }
+
+    // 바깥 영역 클릭 시 닫기
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.remove('active');
+        }
+    });
+
+    // ESC 키로 닫기
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            modal.classList.remove('active');
+        }
+    });
 
     // D-day 계산 함수
     function calculateDDay(expiryString) {
@@ -155,10 +180,134 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // 추천 레시피 렌더링 로직
+    function renderRecipes() {
+        if (!recipeGrid) return;
+
+        // 보유 재료 추출 (기한 만료 제외)
+        const validIngredients = ingredients
+            .map(item => ({ name: item.name, diffDays: calculateDDay(item.expiry).diffDays }))
+            .filter(item => item.diffDays >= 0);
+
+        if (validIngredients.length === 0) {
+            recipeGrid.innerHTML = `
+                <div style="text-align:center; padding: 40px; color: var(--text-light); width: 100%;">
+                    사용 가능한 식재료를 등록하면 맞춤 레시피를 추천해드려요!
+                </div>
+            `;
+            return;
+        }
+
+        // 추천 로직 실행 (전역 함수 사용)
+        const recommended = getRecommendedRecipes(validIngredients);
+        const sorted = getSortedRecipes(recommended, 'DEFAULT');
+        const topRecipes = sorted.slice(0, 6); // 상위 6개 노출
+
+        if (topRecipes.length === 0) {
+            recipeGrid.innerHTML = `
+                <div style="text-align:center; padding: 40px; color: var(--text-light); width: 100%; grid-column: 1 / -1;">
+                    현재 보유 재료로 추천 가능한 레시피가 없습니다.
+                </div>
+            `;
+            return;
+        }
+
+        recipeGrid.innerHTML = '';
+        topRecipes.forEach(recipe => {
+            const card = document.createElement('div');
+            card.className = 'recipe-card-rich';
+            
+            const haveChips = recipe.matchedIngredients.map(ing => `<span class="chip chip-have">${ing}</span>`).join('');
+            
+            let missBox = '';
+            if (recipe.needsMore) {
+                const missChips = recipe.missingIngredients.map(ing => `<span class="chip chip-miss">${ing}</span>`).join('');
+                missBox = `
+                    <div class="rc-ingredient-box split-miss">
+                        <div class="box-title miss-title">추가 구매 필요</div>
+                        <div class="ingredient-chips">${missChips}</div>
+                    </div>
+                `;
+            } else {
+                missBox = `
+                    <div class="rc-ingredient-box split-have" style="background: var(--color-bg-mint-tint); border: 1px solid var(--color-light-mint);">
+                        <div class="box-title have-title" style="color: var(--color-deep-green); text-align: center; width: 100%;">추가 구매 없이 바로 조리 가능</div>
+                    </div>
+                `;
+            }
+
+            let statusBadge = '';
+            if (recipe.hasPriority) {
+                statusBadge = `<span class="badge badge-warning">우선소비 추천</span>`;
+            } else if (recipe.needsMore) {
+                statusBadge = `<span class="badge badge-safe">추가 재료 필요</span>`;
+            } else {
+                statusBadge = `<span class="badge badge-today">바로 요리 가능</span>`;
+            }
+
+            card.innerHTML = `
+                <div class="rc-header">
+                    <span class="badge badge-safe">${recipe.category}</span>
+                    <h3 class="rc-title">${recipe.name}</h3>
+                </div>
+                <div class="rc-body">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span class="badge ${recipe.needsMore ? 'badge-safe' : 'badge-today'}">${recipe.needsMore ? '추가 재료 필요' : '바로 요리 가능'}</span>
+                        <span style="font-weight: 600; color: var(--color-mint-text);">추천 점수: ${Math.round(recipe.matchScoreValue)}점</span>
+                    </div>
+                    <p style="color: var(--text-body); font-size: 0.85rem; font-weight: 500; margin-bottom: 12px;">${recipe.reason}</p>
+                    <div class="rc-ingredients">
+                        <div class="rc-ingredient-box split-have">
+                            <div class="box-title have-title">보유 중인 재료</div>
+                            <div class="ingredient-chips">${haveChips}</div>
+                        </div>
+                        ${missBox}
+                    </div>
+                </div>
+                <div class="rc-footer">
+                    <button class="btn-text recipe-btn">레시피 상세보기 <span class="arrow">&rarr;</span></button>
+                </div>
+            `;
+
+            // 상세보기 클릭 시 모달 오픈
+            const btn = card.querySelector('.recipe-btn');
+            btn.addEventListener('click', () => {
+                document.getElementById('modal-category').textContent = recipe.category;
+                document.getElementById('modal-title').textContent = recipe.name;
+                document.getElementById('modal-reason').textContent = recipe.reason;
+                document.getElementById('modal-time').textContent = recipe.cookingTime;
+                document.getElementById('modal-difficulty').textContent = recipe.difficulty;
+                document.getElementById('modal-calories').textContent = recipe.calories;
+                
+                const scoreElem = document.getElementById('modal-score');
+                if (scoreElem) scoreElem.textContent = Math.round(recipe.matchScoreValue) + '점';
+
+                document.getElementById('modal-have-ingredients').innerHTML = haveChips;
+                document.getElementById('modal-miss-ingredients').innerHTML = recipe.needsMore 
+                    ? recipe.missingIngredients.map(ing => `<span class="chip chip-miss">${ing}</span>`).join('') 
+                    : '<span class="chip chip-have">모두 보유 중!</span>';
+
+                const stepsElem = document.getElementById('modal-steps-list');
+                if (stepsElem) {
+                    if (recipe.steps && Array.isArray(recipe.steps)) {
+                        stepsElem.innerHTML = recipe.steps.map(step => `<li>${step}</li>`).join('');
+                    } else {
+                        stepsElem.innerHTML = '<li>등록된 조리 순서가 없습니다.</li>';
+                    }
+                }
+
+                modal.classList.add('active');
+            });
+
+            recipeGrid.appendChild(card);
+        });
+    }
+
     // 통합 렌더링 함수
     function renderAll() {
         renderInventory();
         renderPriorityList();
+        renderRecipes();
     }
 
     // 초기 화면 렌더링
@@ -203,11 +352,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 레시피 보기 버튼 클릭 이벤트 (기존 유지)
-    const recipeBtns = document.querySelectorAll('.recipe-btn');
-    recipeBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            alert('[기능 구현 예정] 선택하신 레시피의 상세 과정 페이지로 이동합니다.');
-        });
-    });
 });
