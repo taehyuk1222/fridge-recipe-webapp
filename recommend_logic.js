@@ -1,29 +1,29 @@
 import { RECIPE_DATABASE } from './data/recipes.js';
 
 export const getRecommendedRecipes = (myIngredients) => {
-
-    // 1. 재료가 없으면 기계가 멈추지 않게 미리 방어
+    //  
     if (!Array.isArray(myIngredients)) {
         console.error("재료 목록이 올바르지 않아요!");
         return [];
     }
 
-    // 2. 레시피 데이터베이스를 하나씩 꺼내서 분석
+    // 레시피 데이터베이스를 하나씩 꺼내서 분석
     return RECIPE_DATABASE.map(recipe => {
-        // 
+
+        //
         const ingredientsInRecipe = recipe.ingredients || [];
-        
-        // 4. 내 재료와 레시피 재료를 비교해서 일치하는 것만 추출
-        const matched = ingredientsInRecipe.filter(ing => 
+
+        // 내 재료와 레시피 재료를 비교해서 일치하는 것만 추출
+        const matched = ingredientsInRecipe.filter(ing =>
             myIngredients.map(i => i.trim()).includes(ing.trim())
         );
-        
-        // 5. 내가 없는 재료(부족한 재료)가 무엇인지도 찾아 추출
-        const missing = ingredientsInRecipe.filter(ing => 
+
+        // 내가 없는 재료(부족한 재료)가 무엇인지도 찾아 추출
+        const missing = ingredientsInRecipe.filter(ing =>
             !myIngredients.map(i => i.trim()).includes(ing.trim())
         );
 
-        // 6. 재료 기반 레시피 충족도 게산
+        // 재료 기반 레시피 충족도 계산 
         const matchCount = matched.length;
         const totalNeeded = ingredientsInRecipe.length;
         let matchScore = 0;
@@ -31,13 +31,13 @@ export const getRecommendedRecipes = (myIngredients) => {
             matchScore = (matchCount / totalNeeded) * 100;
         }
 
-        // 7. 
+        // 
         return {
             ...recipe,
             matchCount: matchCount,
             matchScore: matchScore.toFixed(1) + '%',
             missingIngredients: missing,
-            needsMore: missing.length > 0 
+            needsMore: missing.length > 0
         };
     });
 };
