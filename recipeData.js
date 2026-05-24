@@ -1,222 +1,402 @@
-export const RECIPE_DATABASE = [
+const RECIPE_DATABASE = [
     {
         id: 1,
-        name: "묵은지 김치찜",
+        name: "돼지고기 김치찜",
         ingredients: ["김치"],
-        needed: ["돼지고기", "묵은지", "다진마늘"],
+        needed: ["돼지고기", "다진마늘", "대파"],
         category: "찜요리",
         difficulty: "중급",
-        cookingTime: "60분 이내",
+        cookingTime: "60분",
         calories: 600,
-        recipeUrl: "https://www.10000recipe.com/recipe/6875468"
+        steps: [
+            "돼지고기를 먹기 좋게 썰어 냄비 바닥에 깝니다.",
+            "묵은지를 길게 찢거나 통째로 고기 위에 얹습니다.",
+            "다진마늘, 고춧가루, 간장으로 간을 한 뒤 물을 붓고 끓입니다.",
+            "중불에서 고기가 푹 익을 때까지 약 40분간 끓여 완성합니다."
+        ]
     },
     {
         id: 2,
-        name: "된장찌개",
-        ingredients: ["된장", "두부", "청양고추", "팽이버섯"],
-        needed: ["애호박", "양파", "감자"],
+        name: "차돌박이 된장찌개",
+        ingredients: ["된장", "두부", "청양고추"],
+        needed: ["애호박", "차돌박이", "양파"],
         category: "국물요리",
-        difficulty: "중급",
-        cookingTime: "60분 이내",
-        calories: 200,
-        recipeUrl: "https://www.10000recipe.com/recipe/6851832"
+        difficulty: "초급",
+        cookingTime: "25분",
+        calories: 350,
+        steps: [
+            "냄비에 차돌박이를 살짝 볶아 기름을 냅니다.",
+            "물을 붓고 된장을 채에 밭쳐 곱게 풀어줍니다.",
+            "썰어둔 애호박, 양파, 두부를 넣고 끓입니다.",
+            "마지막에 청양고추를 송송 썰어 넣어 칼칼함을 더합니다."
+        ]
     },
     {
         id: 3,
-        name: "메추리알볶음",
-        ingredients: ["메추리알", "청양고추"],
-        needed: ["다진마늘"],
+        name: "꽈리고추 메추리알 장조림",
+        ingredients: ["메추리알"],
+        needed: ["꽈리고추", "간장", "올리고당"],
         category: "반찬",
-        difficulty: "초급",
-        cookingTime: "10분 이내",
-        calories: 150,
-        recipeUrl: "https://www.10000recipe.com/recipe/6895112"
+        difficulty: "중급",
+        cookingTime: "30분",
+        calories: 200,
+        steps: [
+            "메추리알은 삶아서 껍질을 까 준비합니다.",
+            "냄비에 간장, 물, 올리고당을 넣고 조림장을 끓입니다.",
+            "메추리알을 넣고 조림장이 반으로 줄어들 때까지 조립니다.",
+            "마지막에 꼭지를 딴 꽈리고추를 넣고 2~3분간 더 조려 완성합니다."
+        ]
     },
     {
         id: 4,
-        name: "순대볶음",
+        name: "깻잎 순대볶음",
         ingredients: ["양파", "대파"],
-        needed: ["순대", "들깨가루", "깻잎"],
+        needed: ["순대", "들깨가루", "깻잎", "양배추"],
         category: "볶음요리",
         difficulty: "중급",
-        cookingTime: "20분 이내",
+        cookingTime: "20분",
         calories: 650,
-        recipeUrl: "https://www.10000recipe.com/recipe/6913906"
+        steps: [
+            "순대는 큼직하게 썰고, 양배추와 양파는 채 썹니다.",
+            "팬에 식용유를 두르고 채소부터 볶다가 숨이 죽으면 순대를 넣습니다.",
+            "고추장, 고춧가루, 간장, 다진마늘로 만든 양념장을 넣고 빠르게 볶습니다.",
+            "불을 끄기 직전에 깻잎과 들깨가루를 듬뿍 넣고 섞어줍니다."
+        ]
     },
     {
         id: 5,
-        name: "카레",
-        ingredients: ["양파", "당근"],
-        needed: ["카레가루", "감자", "돼지고기"],
+        name: "돼지고기 카레",
+        ingredients: ["양파", "당근", "감자"],
+        needed: ["카레가루", "돼지고기"],
         category: "일품요리",
-        difficulty: "중급",
-        cookingTime: "30분 이내",
+        difficulty: "초급",
+        cookingTime: "30분",
         calories: 500,
-        recipeUrl: "https://www.10000recipe.com/recipe/6886933"
+        steps: [
+            "감자, 당근, 양파, 돼지고기를 깍둑썰기합니다.",
+            "팬에 기름을 두르고 단단한 채소와 고기 순서로 달달 볶아줍니다.",
+            "재료가 잠길 만큼 물을 붓고 감자가 익을 때까지 푹 끓입니다.",
+            "불을 약하게 줄이고 카레가루를 조금씩 풀어가며 걸쭉하게 끓여냅니다."
+        ]
     },
     {
         id: 6,
-        name: "간장계란밥",
-        ingredients: ["계란", "간장", "마요네즈"],
-        needed: ["버터"],
+        name: "버터 간장계란밥",
+        ingredients: ["계란", "간장"],
+        needed: ["버터", "참기름"],
         category: "밥요리",
         difficulty: "초급",
-        cookingTime: "5분 이내",
-        calories: 500,
-        recipeUrl: "https://www.10000recipe.com/recipe/6856565"
+        cookingTime: "5분",
+        calories: 450,
+        steps: [
+            "따뜻한 밥 위에 버터 한 조각을 올려 녹입니다.",
+            "반숙 프라이를 만들어 밥 위에 올립니다.",
+            "간장 1큰술과 참기름 반 큰술을 두릅니다.",
+            "노른자를 톡 터뜨려 밥과 함께 싹싹 비벼 먹습니다."
+        ]
     },
     {
         id: 7,
-        name: "떡볶이",
+        name: "국물 떡볶이",
         ingredients: ["고추장", "대파"],
-        needed: ["떡", "어묵", "소시지"],
+        needed: ["떡", "어묵", "설탕"],
         category: "분식",
         difficulty: "초급",
-        cookingTime: "30분 이내",
+        cookingTime: "20분",
         calories: 700,
-        recipeUrl: "https://www.10000recipe.com/recipe/6846848"
+        steps: [
+            "떡은 물에 불려두고 어묵과 대파는 큼직하게 썹니다.",
+            "물에 고추장, 고춧가루, 설탕을 1:1:1 비율로 넣고 끓입니다.",
+            "국물이 끓어오르면 떡과 어묵을 넣고 중불에서 끓입니다.",
+            "국물이 걸쭉해지면 썰어둔 대파를 넣고 1분간 더 끓입니다."
+        ]
     },
     {
         id: 8,
-        name: "잡채",
-        ingredients: ["당근", "시금치"],
-        needed: ["당면", "돼지고기", "표고버섯", "어묵"],
+        name: "고기 잡채",
+        ingredients: ["당근", "시금치", "양파"],
+        needed: ["당면", "돼지고기", "표고버섯"],
         category: "반찬",
-        difficulty: "중급",
-        cookingTime: "30분 이내",
+        difficulty: "고급",
+        cookingTime: "40분",
         calories: 550,
-        recipeUrl: "https://www.10000recipe.com/recipe/6862505"
+        steps: [
+            "당면은 끓는 물에 6분간 삶은 뒤 찬물에 헹궈 참기름에 버무립니다.",
+            "시금치는 데치고, 양파, 당근, 표고버섯, 고기는 채 썰어 각각 볶습니다.",
+            "큰 볼에 모든 재료를 담습니다.",
+            "간장, 설탕, 다진마늘, 참기름으로 간을 맞추며 고루 버무립니다."
+        ]
     },
     {
         id: 9,
-        name: "김치볶음밥",
+        name: "햄 김치볶음밥",
         ingredients: ["김치"],
-        needed: ["계란", "햄", "대파"],
+        needed: ["계란", "햄", "대파", "참기름"],
         category: "밥요리",
         difficulty: "초급",
-        cookingTime: "20분 이내",
+        cookingTime: "15분",
         calories: 600,
-        recipeUrl: "https://www.10000recipe.com/recipe/6903110"
+        steps: [
+            "팬에 기름을 두르고 잘게 썬 대파를 볶아 파기름을 냅니다.",
+            "잘게 썬 햄과 김치를 넣고 신맛이 날아갈 때까지 충분히 볶습니다.",
+            "밥을 넣고 주걱으로 가르듯 볶다가 참기름을 살짝 두릅니다.",
+            "접시에 담고 반숙 계란 프라이를 얹어 완성합니다."
+        ]
     },
     {
         id: 10,
-        name: "라면",
-        ingredients: ["라면사리", "스프", "계란", "대파"],
-        needed: [],
+        name: "대파 계란 라면",
+        ingredients: ["라면사리", "대파"],
+        needed: ["계란", "스프"],
         category: "면요리",
         difficulty: "초급",
-        cookingTime: "5분 이내",
+        cookingTime: "5분",
         calories: 500,
-        recipeUrl: "https://www.10000recipe.com/recipe/6919436"
+        steps: [
+            "대파는 얇게 채 썰어 찬물에 담가 매운맛을 뺍니다.",
+            "끓는 물에 라면스프와 면을 넣고 끓입니다.",
+            "면이 반쯤 익었을 때 계란을 풀지 않고 그대로 톡 까 넣습니다.",
+            "그릇에 담고 미리 준비해둔 파채를 산더미처럼 쌓아 올립니다."
+        ]
     },
     {
         id: 11,
-        name: "토마토파스타",
-        ingredients: ["면", "마늘"],
-        needed: ["토마토소스", "페퍼론치노"],
-        category: "면요리",
+        name: "마늘 토마토 파스타",
+        ingredients: ["마늘"],
+        needed: ["스파게티면", "토마토소스", "양파"],
+        category: "양식요리",
         difficulty: "중급",
-        cookingTime: "15분 이내",
-        calories: 600,
-        recipeUrl: "https://www.10000recipe.com/recipe/6838229"
+        cookingTime: "20분",
+        calories: 550,
+        steps: [
+            "끓는 소금물에 스파게티 면을 8분간 삶아줍니다.",
+            "올리브유를 두른 팬에 편마늘과 다진 양파를 볶아 향을 냅니다.",
+            "시판 토마토소스와 면수 1국자를 넣고 끓여 소스를 만듭니다.",
+            "삶아진 면을 소스에 넣고 1~2분간 함께 볶아 면에 소스가 배게 합니다."
+        ]
     },
     {
         id: 12,
-        name: "파전",
+        name: "오징어 해물파전",
         ingredients: ["쪽파", "계란"],
-        needed: ["튀김가루", "탄산수"],
-        category: "전",
-        difficulty: "초급",
-        cookingTime: "10분 이내",
-        calories: 600,
-        recipeUrl: "https://www.10000recipe.com/recipe/6887020"
+        needed: ["부침가루", "오징어", "청양고추"],
+        category: "전요리",
+        difficulty: "중급",
+        cookingTime: "15분",
+        calories: 450,
+        steps: [
+            "부침가루에 얼음물을 섞어 바삭한 반죽을 만듭니다.",
+            "기름을 넉넉히 두른 팬에 쪽파를 나란히 얹고 반죽을 얇게 붓습니다.",
+            "그 위에 썰어둔 오징어와 청양고추를 고루 뿌려줍니다.",
+            "계란 하나를 대충 풀어 전 위에 덧바른 뒤 앞뒤로 노릇하게 굽습니다."
+        ]
     },
     {
         id: 13,
-        name: "오므라이스",
-        ingredients: ["계란", "감자", "햄"],
-        needed: ["파", "양파"],
+        name: "햄 야채 오므라이스",
+        ingredients: ["계란", "양파"],
+        needed: ["밥", "햄", "케첩"],
         category: "일품요리",
-        difficulty: "중급",
-        cookingTime: "15분 이내",
+        difficulty: "고급",
+        cookingTime: "20분",
         calories: 600,
-        recipeUrl: "https://www.10000recipe.com/recipe/6882172"
+        steps: [
+            "다진 양파와 햄을 볶다가 밥과 케첩을 넣고 볶음밥을 만듭니다.",
+            "팬에 식용유를 두르고 계란물을 부은 뒤 젓가락으로 회오리 모양을 잡습니다.",
+            "부드럽게 반숙으로 익힌 계란을 볶음밥 위에 살포시 덮어줍니다.",
+            "주변에 오므라이스 소스를 넉넉히 뿌려 완성합니다."
+        ]
     },
     {
         id: 14,
-        name: "콩나물국",
-        ingredients: ["콩나물", "대파"],
-        needed: ["마늘", "다시마"],
+        name: "얼큰 콩나물국밥",
+        ingredients: ["콩나물", "대파", "청양고추"],
+        needed: ["멸치육수", "새우젓", "밥"],
         category: "국물요리",
         difficulty: "초급",
-        cookingTime: "15분 이내",
-        calories: 100,
-        recipeUrl: "https://www.10000recipe.com/recipe/6877595"
+        cookingTime: "15분",
+        calories: 300,
+        steps: [
+            "진하게 우려낸 멸치육수가 끓으면 깨끗이 씻은 콩나물을 넣습니다.",
+            "뚜껑을 열어둔 채로 끓이다가 다진마늘과 새우젓으로 시원하게 간을 합니다.",
+            "대파와 청양고추를 송송 썰어 넣습니다.",
+            "뚝배기에 밥을 담고 끓인 국물과 콩나물을 수북하게 얹어 냅니다."
+        ]
     },
     {
         id: 15,
-        name: "스테이크",
+        name: "소고기 안심 스테이크",
         ingredients: ["마늘"],
-        needed: ["소고기", "버터", "방울토마토", "허브"],
+        needed: ["소고기안심", "버터", "아스파라거스"],
         category: "양식요리",
         difficulty: "고급",
-        cookingTime: "20분 이내",
+        cookingTime: "15분",
         calories: 700,
-        recipeUrl: "https://www.10000recipe.com/recipe/6883011"
+        steps: [
+            "소고기는 굽기 전 실온에 30분 두어 온도를 맞추고 소금, 후추로 간을 합니다.",
+            "연기가 날 정도로 뜨겁게 달군 팬에 오일을 두르고 고기를 올려 겉면을 바짝 굽습니다.",
+            "버터와 으깬 마늘을 팬에 넣고 녹은 버터를 고기 위에 끼얹어 향을 입힙니다.",
+            "구운 고기는 5분간 레스팅하여 육즙이 퍼지게 한 뒤 썰어냅니다."
+        ]
     },
     {
         id: 16,
-        name: "들깨미역국",
+        name: "소고기 미역국",
         ingredients: ["미역", "마늘"],
-        needed: ["소고기", "들깨가루"],
+        needed: ["소고기국거리", "국간장", "참기름"],
         category: "국물요리",
         difficulty: "중급",
-        cookingTime: "15분 이내",
-        calories: 400,
-        recipeUrl: "https://www.10000recipe.com/recipe/6853456"
+        cookingTime: "30분",
+        calories: 350,
+        steps: [
+            "건미역은 물에 20분 정도 푹 불려 바락바락 씻은 뒤 적당히 자릅니다.",
+            "냄비에 참기름을 두르고 핏물을 뺀 소고기와 미역을 달달 볶습니다.",
+            "미역이 파래지면 물을 붓고 국간장과 다진마늘로 간을 합니다.",
+            "뚜껑을 덮고 약불에서 20분 이상 은근하게 푹 끓여 깊은 맛을 냅니다."
+        ]
     },
     {
         id: 17,
-        name: "샌드위치",
-        ingredients: ["식빵", "치즈", "토마토"],
-        needed: ["햄", "양상추"],
+        name: "BLT 샌드위치",
+        ingredients: ["토마토", "양상추"],
+        needed: ["식빵", "베이컨", "마요네즈"],
         category: "간식",
         difficulty: "초급",
-        cookingTime: "20분 이내",
-        calories: 500,
-        recipeUrl: "https://www.10000recipe.com/recipe/6707909"
+        cookingTime: "10분",
+        calories: 450,
+        steps: [
+            "식빵은 토스터나 팬에 노릇하게 굽고 한쪽 면에 마요네즈를 바릅니다.",
+            "베이컨은 바삭하게 굽고, 토마토는 슬라이스하여 수분을 제거합니다.",
+            "빵 위에 양상추를 듬뿍 올리고 토마토와 베이컨을 차곡차곡 쌓습니다.",
+            "나머지 식빵으로 덮은 뒤 무거운 것으로 살짝 눌러 썰기 좋게 만듭니다."
+        ]
     },
     {
         id: 18,
-        name: "샐러드",
-        ingredients: ["양상추", "토마토", "맛살", "오이"],
-        needed: ["드레싱"],
+        name: "닭가슴살 샐러드",
+        ingredients: ["양상추", "토마토"],
+        needed: ["닭가슴살", "발사믹식초", "올리브오일"],
         category: "간식",
         difficulty: "초급",
-        cookingTime: "10분 이내",
-        calories: 150,
-        recipeUrl: "https://www.10000recipe.com/recipe/1677973"
+        cookingTime: "10분",
+        calories: 250,
+        steps: [
+            "닭가슴살은 삶거나 구워서 결대로 먹기 좋게 찢어줍니다.",
+            "양상추와 토마토는 깨끗이 씻어 한 입 크기로 썹니다.",
+            "올리브오일과 발사믹식초를 3:1 비율로 섞고 꿀을 약간 더해 드레싱을 만듭니다.",
+            "채소 위에 닭가슴살을 올리고 먹기 직전에 드레싱을 뿌립니다."
+        ]
     },
     {
         id: 19,
-        name: "만두국",
-        ingredients: ["만두", "대파"],
-        needed: ["계란", "다진마늘"],
+        name: "사골 떡만두국",
+        ingredients: ["대파", "계란"],
+        needed: ["만두", "떡국떡", "사골육수"],
         category: "국물요리",
         difficulty: "중급",
-        cookingTime: "20분 이내",
-        calories: 400,
-        recipeUrl: "https://www.10000recipe.com/recipe/6950880"
+        cookingTime: "15분",
+        calories: 500,
+        steps: [
+            "시판 사골육수를 냄비에 붓고 끓입니다.",
+            "육수가 끓으면 불려둔 떡국떡과 왕만두를 넣습니다.",
+            "만두가 물 위로 떠오르면 다진마늘과 소금으로 간을 맞춥니다.",
+            "마지막에 대파를 넣고 계란 지단을 올려 고소함을 더합니다."
+        ]
     },
     {
         id: 20,
-        name: "비엔나소시지볶음",
-        ingredients: ["비엔나소시지", "양파"],
-        needed: ["케첩", "설탕"],
-        category: "볶음",
+        name: "소시지 채소볶음",
+        ingredients: ["양파", "당근"],
+        needed: ["비엔나소시지", "케첩", "굴소스"],
+        category: "반찬",
         difficulty: "초급",
-        cookingTime: "10분 이내",
+        cookingTime: "10분",
+        calories: 400,
+        steps: [
+            "비엔나소시지는 문어 모양으로 칼집을 냅니다.",
+            "양파와 당근은 소시지와 비슷한 크기로 네모나게 썹니다.",
+            "팬에 기름을 두르고 채소와 소시지를 함께 볶아줍니다.",
+            "케첩 3, 굴소스 1, 올리고당 1 비율로 양념을 넣고 빠르게 볶아 완성합니다."
+        ]
+    },
+    {
+        id: 21,
+        name: "계란찜",
+        ingredients: ["계란", "대파"],
+        needed: ["새우젓"],
+        category: "반찬",
+        difficulty: "초급",
+        cookingTime: "10분",
+        calories: 200,
+        steps: [
+            "계란 4개를 풀고 동량의 물(또는 다시마 육수)을 섞어 체에 거릅니다.",
+            "다진 대파와 새우젓 국물을 넣어 간을 맞춥니다.",
+            "뚝배기나 내열 용기에 담아 전자레인지에서 3~4분간 돌리거나 찜기에 찝니다.",
+            "참기름 한 방울을 떨어뜨려 고소하게 마무리합니다."
+        ]
+    },
+    {
+        id: 22,
+        name: "오이 양파 무침",
+        ingredients: ["오이", "양파"],
+        needed: ["고추장", "식초", "설탕"],
+        category: "반찬",
+        difficulty: "초급",
+        cookingTime: "5분",
+        calories: 100,
+        steps: [
+            "오이는 반으로 갈라 어슷썰기 하고, 양파는 채 썹니다.",
+            "고추장, 식초, 설탕, 다진마늘을 섞어 초고추장 양념을 만듭니다.",
+            "썰어둔 채소에 양념을 붓고 가볍게 버무려줍니다.",
+            "통깨를 솔솔 뿌려 아삭한 식감을 살려 바로 먹습니다."
+        ]
+    },
+    {
+        id: 23,
+        name: "감자채 전",
+        ingredients: ["감자"],
+        needed: ["부침가루", "식용유"],
+        category: "전요리",
+        difficulty: "초급",
+        cookingTime: "15분",
+        calories: 350,
+        steps: [
+            "감자를 최대한 얇게 채 썰어 전분기를 빼지 않고 볼에 담습니다.",
+            "부침가루를 약간만 넣어 감자채끼리 엉겨 붙을 정도로만 섞습니다.",
+            "팬에 기름을 넉넉히 두르고 반죽을 넓게 펴서 누르며 굽습니다.",
+            "가장자리가 바삭해지면 뒤집어서 노릇하게 구워 완성합니다."
+        ]
+    },
+    {
+        id: 24,
+        name: "옥수수 콘치즈",
+        ingredients: ["양파"],
+        needed: ["옥수수통조림", "모짜렐라치즈", "마요네즈"],
+        category: "간식",
+        difficulty: "초급",
+        cookingTime: "10분",
         calories: 500,
-        recipeUrl: "https://www.10000recipe.com/recipe/6928877"
+        steps: [
+            "통조림 옥수수는 물기를 완전히 빼서 준비합니다.",
+            "잘게 다진 양파와 옥수수를 마요네즈, 설탕 약간에 버무립니다.",
+            "버터를 두른 무쇠 팬에 버무린 옥수수를 넓게 펼쳐 담습니다.",
+            "모짜렐라 치즈를 듬뿍 얹고 치즈가 녹아 노릇해질 때까지 약불에서 굽습니다."
+        ]
+    },
+    {
+        id: 25,
+        name: "제육볶음",
+        ingredients: ["양파", "대파", "청양고추"],
+        needed: ["돼지고기앞다리살", "고추장", "고춧가루", "다진마늘"],
+        category: "일품요리",
+        difficulty: "중급",
+        cookingTime: "25분",
+        calories: 600,
+        steps: [
+            "얇게 썬 앞다리살에 고추장, 고춧가루, 간장, 설탕, 마늘 양념을 버무려 재웁니다.",
+            "팬을 뜨겁게 달군 뒤 재운 고기를 올려 센 불에서 빠르게 볶습니다.",
+            "고기가 반쯤 익으면 썰어둔 양파와 대파를 넣고 수분을 날리며 볶습니다.",
+            "마지막에 청양고추를 넣어 매운맛을 내고 깨를 뿌려 냅니다."
+        ]
     }
 ];

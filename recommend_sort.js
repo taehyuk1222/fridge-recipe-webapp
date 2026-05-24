@@ -4,8 +4,11 @@ const DIFFICULTY_ORDER = { '쉬움': 1, '보통': 2, '어려움': 3 };
 const SORT_STRATEGIES = {
 
     DEFAULT: (a, b) => {
-        const scoreDiff = parseFloat(b.matchScore) - parseFloat(a.matchScore);
+        const scoreDiff = parseFloat(b.matchScoreValue || 0) - parseFloat(a.matchScoreValue || 0);
         if (scoreDiff !== 0) return scoreDiff;
+
+        const missingDiff = (a.missingIngredients ? a.missingIngredients.length : 0) - (b.missingIngredients ? b.missingIngredients.length : 0);
+        if (missingDiff !== 0) return missingDiff;
 
         const diffA = DIFFICULTY_ORDER[a.difficulty] || 99;
         const diffB = DIFFICULTY_ORDER[b.difficulty] || 99;
@@ -38,7 +41,7 @@ const SORT_STRATEGIES = {
  * @param {Array} recipes - 레시피 목록
  * @param {String} mode - 정렬 모드 ('DEFAULT' | 'EASY_MODE' | 'QUICK_MODE' | 'DIET_MODE')
  */
-export const getSortedRecipes = (recipes, mode = 'DEFAULT') => {
+const getSortedRecipes = (recipes, mode = 'DEFAULT') => {
     if (!Array.isArray(recipes)) return [];
 
     // 선택된 전략이 없을 경우 안전하게 DEFAULT 반환

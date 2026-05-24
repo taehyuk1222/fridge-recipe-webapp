@@ -252,7 +252,7 @@
                 <p>우선 소비 식재료를 활용해 지금 바로 만들 수 있는 요리를 제안합니다.</p>
             </div>
             
-            <div class="recipe-rich-grid">
+            <div class="recipe-rich-grid" id="recipe-grid">
                 
                 <!-- Recipe 1: Ready -->
                 <div class="recipe-card-rich">
@@ -324,6 +324,42 @@
         </div>
     </footer>
 
+    <!-- Recipe Modal -->
+    <div id="recipe-modal" class="modal-overlay">
+        <div class="modal-content premium-card">
+            <button id="modal-close" class="modal-close">&times;</button>
+            <div class="modal-header">
+                <span id="modal-category" class="badge badge-safe">카테고리</span>
+                <h2 id="modal-title" style="margin: 8px 0;">레시피명</h2>
+                <p id="modal-reason" class="modal-reason" style="color: var(--color-mint-text); font-weight: 600;">추천 이유</p>
+            </div>
+            <div class="modal-body" style="margin-top: 20px;">
+                <div class="modal-meta" style="display: flex; gap: 16px; margin-bottom: 20px; color: var(--text-light); font-size: 0.9rem;">
+                    <span>⏱ <span id="modal-time">15분</span></span>
+                    <span>⭐ 난이도: <span id="modal-difficulty">초급</span></span>
+                    <span>🔥 칼로리: <span id="modal-calories">500</span>kcal</span>
+                    <span>🏆 추천 점수: <span id="modal-score" style="font-weight: 600; color: var(--color-mint-text);">80점</span></span>
+                </div>
+                <div class="modal-section" style="margin-bottom: 16px;">
+                    <h3 style="font-size: 1rem; margin-bottom: 8px;">활용 가능 재료</h3>
+                    <div id="modal-have-ingredients" class="ingredient-chips"></div>
+                </div>
+                <div class="modal-section" style="margin-bottom: 24px;">
+                    <h3 style="font-size: 1rem; margin-bottom: 8px;">추가 구매 필요 재료</h3>
+                    <div id="modal-miss-ingredients" class="ingredient-chips"></div>
+                </div>
+                <div class="modal-section">
+                    <h3 style="font-size: 1rem; margin-bottom: 8px;">간단 조리 순서</h3>
+                    <ol id="modal-steps-list" class="modal-steps" style="color: var(--text-body); font-size: 0.95rem; line-height: 1.6; padding-left: 20px; margin-bottom: 24px;">
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="recipeData.js"></script>
+    <script src="recommend_logic.js"></script>
+    <script src="recommend_sort.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
