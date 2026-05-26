@@ -91,3 +91,11 @@ Fridge Recipe는 냉장고 속 식재료의 유통기한을 관리하고, 보유
 - 추천 이력을 저장하고 이를 기반으로 장보기 리스트 자동 생성
 - 다양한 요리를 지원하기 위한 대규모 레시피 데이터베이스 확장
 - 사용자 소비 패턴을 기반으로 한 개인화 맞춤형 추천 알고리즘 도입
+
+- ## 11. 관련 문서
+
+- [사용 가이드](docs/user-guide.md)
+- [추천 알고리즘 설명](docs/recommendation-algorithm.md)
+- [프로젝트 요구사항 문서](docs/project-requirements.md)
+- [최종 기능 테스트 케이스](docs/test-cases.md)
+- [GitHub Wiki](../../wiki)
